@@ -1,0 +1,13 @@
+:root {
+  --dark-light: rgba(0, 0, 0, 0.8);
+  --primary: #617fde;
+}
+
+.active > button {
+  font-weight: bold !important;
+  color: var(--primary) !important;
+}
+
+.navLink {
+  background: var(--primary);
+}
