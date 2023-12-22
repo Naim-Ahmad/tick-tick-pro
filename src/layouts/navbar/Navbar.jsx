@@ -19,27 +19,33 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 
 const drawerWidth = 240;
-const navItems = [
-  {
-    route: "/",
-    label: "Home"
-  },
-  {
-    route: "/features",
-    label: "Features"
-  },
-  {
-    route: "/contact",
-    label: "Contact"
-  },
 
-];
 
 function Navbar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const { user, logout } = React.useContext(AuthContext)
+
+  const navItems = [
+    {
+      route: "/",
+      label: "Home"
+    },
+    {
+      route: "/features",
+      label: "Features"
+    },
+    {
+      route: "/contact",
+      label: "Contact"
+    },
+  ];
+
+  if(user){
+    navItems.push({route: "/dashboard", label: 'Dashboard'})
+  }
+  // console.log(navItems)
 
   const navigate = useNavigate()
 
@@ -55,10 +61,10 @@ function Navbar(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <NavLink style={{ textDecoration: 'none' }} to={item.route} key={item.label} >
+          <NavLink style={{ textDecoration: 'none' }} to={item?.route} key={item?.label} >
             <ListItem disablePadding>
               <ListItemButton sx={{ textAlign: 'center', color: 'black' }}>
-                <ListItemText primary={item.label} />
+                <ListItemText primary={item?.label} />
               </ListItemButton>
             </ListItem>
           </NavLink>
@@ -116,9 +122,9 @@ function Navbar(props) {
 
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
               {navItems.map((item) => (
-                <NavLink to={item.route} key={item.label}>
+                <NavLink to={item?.route} key={item?.label}>
                   <Button size='medium' style={{ textTransform: 'capitalize', color: "rgba(0,0,0, 0.87)" }}>
-                    {item.label}
+                    {item?.label}
                   </Button>
                 </NavLink>
               ))}

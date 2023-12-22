@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import useCreateUser from '../../hooks/useCreateUser';
 
 export default function SocialLogin() {
 
@@ -12,9 +13,16 @@ export default function SocialLogin() {
   // console.log(loginWithGithub, loginWithGoogle)
   const navigate = useNavigate()
 
+  const { mutate} = useCreateUser()
+
   const handleSocialLogin = (func)=>{
     func()
-    .then(()=> {
+    .then((currentUser)=> {
+      const user =  {
+        userName: currentUser.user.displayName,
+        userEmail: currentUser.user.email
+      }
+      mutate(user)
       toast.success('Logged in!')
       navigate('/')
     })

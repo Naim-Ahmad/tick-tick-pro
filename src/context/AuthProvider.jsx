@@ -1,5 +1,6 @@
-import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { createContext, useEffect, useState } from "react";
+import axiosPublic from '../config/axios.config.js';
 import auth from '../config/firebase.config.js';
 
 export const AuthContext = createContext()
@@ -21,6 +22,11 @@ export default function AuthProvider({ children }) {
     })
   }
 
+  const signInWithEmail = (email, password)=> {
+    // console.log(email, password)
+    return signInWithEmailAndPassword(auth, email, password)
+  }
+
   const loginWithGoogle = () => {
     const provider = new GoogleAuthProvider()
     return signInWithPopup(auth, provider)
@@ -37,7 +43,15 @@ export default function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser)
+      if(currentUser){
+        axiosPublic.post('/createToken', {email: currentUser.email})
+        .then(res=> console.log(res.data))
+        setUser(currentUser)
+      }else{
+        axiosPublic.delete('/deleteToken')
+        .then(res=> console.log(res.data))
+        setUser(null)
+      }
       setIsLoading(false)
     })
 
@@ -51,6 +65,7 @@ export default function AuthProvider({ children }) {
     loginWithGoogle,
     updateUserInfo,
     loginWithGithub,
+    signInWithEmail,
     logout
   }
 

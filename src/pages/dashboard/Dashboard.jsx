@@ -46,7 +46,7 @@ export default function Dashboard() {
             <List dense sx={{ width: '100%', bgcolor: 'background.paper' }}>
               <ListItem
                 ref={drag}
-                style={isDragging && {border: '3px solid tomato'}}
+                
                 secondaryAction={
                   <Checkbox
                     edge="end"
