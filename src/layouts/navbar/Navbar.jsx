@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import toast from 'react-hot-toast';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import tickIcon from '../../assets/ticktickicon.png';
 import { AuthContext } from '../../context/AuthProvider';
 
 const drawerWidth = 240;
@@ -108,7 +109,7 @@ function Navbar(props) {
               variant="h6"
               component="div"
             >
-              Tick Tick Pro
+              <img src={tickIcon} style={{width: '10rem'}} />
             </Typography>
 
             <IconButton

@@ -1,6 +1,7 @@
 import { Box, Toolbar } from "@mui/material";
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router-dom";
+import Footer from "./footer/Footer";
 import Navbar from "./navbar/Navbar";
 
 export default function MainLayout() {
@@ -13,6 +14,7 @@ export default function MainLayout() {
         <Toolbar />
         <Outlet />
       </Box>
+      <Footer/>
     </>
   )
 }
