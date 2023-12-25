@@ -9,20 +9,22 @@ export default function Hero() {
       <Grid container spacing={4} minHeight={"80svh"} alignItems="center">
         <Grid item sm={12} md={6}>
           <Box sx={{ textAlign: { xs: 'center', md: 'left' } }}>
-            <Typography variant="h2" sx={{ fontSize: { xs: 40, sm: 60 } }} fontWeight={900}>
-              Stay Organized
-              Stay Creative
-            </Typography>
+            <div data-aos="fade-up">
+              <Typography variant="h2" sx={{ fontSize: { xs: 40, sm: 60 } }} fontWeight={900}>
+                Stay Organized
+                Stay Creative
+              </Typography>
 
-            <Typography variant="subtitle1" fontSize={18} my="1.5rem">
-              Join millions of people to capture ideas, organize life, and do something creative everyday.
-            </Typography>
+              <Typography variant="subtitle1" fontSize={18} my="1.5rem">
+                Join millions of people to capture ideas, organize life, and do something creative everyday.
+              </Typography>
 
-            <Link to="/dashboard">
-              <Button variant="contained" size="large">
-                Let&apos;s Get Start
-              </Button>
-            </Link>
+              <Link to="/dashboard">
+                <Button variant="contained" size="large">
+                  Let&apos;s Get Start
+                </Button>
+              </Link>
+            </div>
           </Box>
         </Grid>
         <Grid item sm={12} md={6}>

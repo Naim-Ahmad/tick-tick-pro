@@ -1,3 +1,3 @@
 export const dragTypes = {
-  task: "task",
+  task: "TASK",
 };

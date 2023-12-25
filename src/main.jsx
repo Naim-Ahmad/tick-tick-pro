@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom/client';
 
 import { ThemeProvider } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import aos from 'aos';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { RouterProvider } from 'react-router-dom';
@@ -14,6 +15,8 @@ import theme from './config/theme';
 import AuthProvider from './context/AuthProvider';
 import './index.css';
 import router from './routes/routes';
+
+aos.init()
 
 const queryClient = new QueryClient()
 

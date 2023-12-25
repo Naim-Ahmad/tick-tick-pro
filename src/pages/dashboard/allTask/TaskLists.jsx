@@ -1,79 +1,73 @@
-import { ArrowForward, Done } from '@mui/icons-material';
+import { EditOutlined } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { IconButton, ListItem, ListItemButton } from '@mui/material';
+import { Chip, IconButton, ListItem, ListItemButton } from '@mui/material';
 import ListItemText from '@mui/material/ListItemText';
+import toast from 'react-hot-toast';
+import DialogModal from '../../../components/DialogModal';
+import useDNDDrag from '../../../hooks/dragAndDrop/useDNDDrag';
+import useToggler from '../../../hooks/toggler/useToggler';
 import useDeleteTask from '../../../hooks/useDeleteTask';
-import useUpdateTask from '../../../hooks/useUpdateTask';
 
 export default function TaskLists({ labelId, data }) {
 
-  // const [checked, setChecked] = useState([0]);
+  const { mutateAsync } = useDeleteTask()
 
-  // const handleToggle = (value) => () => {
-  //   const currentIndex = checked.indexOf(value);
-  //   const newChecked = [...checked];
-
-  //   if (currentIndex === -1) {
-  //     newChecked.push(value);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
-
-  //   setChecked(newChecked);
-  // };
-
-  // console.log(checked)
-
-  const { mutate } = useDeleteTask()
-
-  const { mutate: updateTask } = useUpdateTask()
+  const [open, handleOpen] = useToggler()
 
 
-  const handleDelete = () => {
+  const { drag, isDragging } = useDNDDrag(data?._id)
+
+  const handleDelete = async () => {
     // console.log(data?._id)
-    mutate(data?._id)
+    try {
+      await mutateAsync(data?._id)
+      toast.success("Deleted Task")
+      
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message)
+    }
   }
 
-  const handleUpdate = () => {
-    updateTask({ id: data?._id, data: { status: 'completed' } })
-  }
-
-  const handleOngoing = () => {
-    updateTask({ id: data?._id, data: { status: 'ongoing' } })
-  }
+  const chipColor = data?.priority === 'heigh'
+    ? <Chip color="primary" sx={{ textTransform: 'capitalize' }} size='small' label={data?.priority} />
+      : data?.priority === 'moderate'
+      ? <Chip color="warning" sx={{ textTransform: 'capitalize' }} size='small' label={data?.priority} />
+      : <Chip sx={{ textTransform: 'capitalize' }} size='small' label={data?.priority} />
 
 
+// console.log(data)
   return (
-    <ListItem
-      secondaryAction={
-        <>
-          <IconButton onClick={handleUpdate} edge="end" aria-label="comments">
+    <>
+
+      <DialogModal open={open} handleClose={handleOpen} id={data?._id} />
+      <ListItem
+        ref={drag}
+        style={isDragging ? { opacity: 0.2 } : {}}
+        secondaryAction={
+          <>
+            {/* <IconButton onClick={handleUpdate} edge="end" aria-label="comments">
             <Done />
           </IconButton>
 
           <IconButton onClick={handleOngoing} edge="end" aria-label="comments">
             <ArrowForward />
-          </IconButton>
+          </IconButton> */}
+            <IconButton onClick={handleOpen} edge="end" aria-label="comments">
+              <EditOutlined />
+            </IconButton>
+            <IconButton onClick={handleDelete} edge="end" aria-label="comments">
+              <DeleteIcon />
+            </IconButton>
+          </>
+        }
+        disablePadding
+      >
 
-          <IconButton onClick={handleDelete} edge="end" aria-label="comments">
-            <DeleteIcon />
-          </IconButton>
-        </>
-      }
-      disablePadding
-    >
-      <ListItemButton role={undefined} dense>
-        {/* <ListItemIcon>
-          <Checkbox
-            edge="start"
-            // checked={checked.indexOf(data) !== -1}
-            tabIndex={-1}
-            disableRipple
-            inputProps={{ 'aria-labelledby': labelId }}
-          />
-        </ListItemIcon> */}
-        <ListItemText id={labelId} primary={data?.taskTitle} />
-      </ListItemButton>
-    </ListItem>
+        <ListItemButton role={undefined} sx={{ display: 'flex' }} dense>
+          <ListItemText sx={{ display: 'flex', textTransform: 'capitalize', fontWeight: 'bold', alignItems: 'center', gap: '8px' }} secondary={chipColor} id={labelId} primary={data?.taskTitle} />
+        </ListItemButton>
+      </ListItem>
+    </>
   )
-}
+} 

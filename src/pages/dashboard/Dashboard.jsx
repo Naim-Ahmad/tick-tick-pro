@@ -1,4 +1,3 @@
-import { Container } from '@mui/material';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import PropTypes from 'prop-types';
@@ -12,7 +11,7 @@ function Dashboard() {
 
 
   return (
-    <Container>
+   
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <Box
@@ -26,13 +25,14 @@ function Dashboard() {
         <Box
           component="main"
           bgcolor="#F3F6F9"
-          sx={{  width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+          sx={{  width: { sm: `calc(100% - ${drawerWidth}px)` }, minHeight: '100svh' }}
         >
+          
          <Outlet></Outlet>
 
         </Box>
       </Box>
-    </Container>
+   
   );
 }
 

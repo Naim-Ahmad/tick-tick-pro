@@ -5,7 +5,7 @@ export default function useDeleteTask() {
 
   const queryClient = useQueryClient()
 
-  const {data, isPending, error, status, isError, mutate} = useMutation({
+  const {data, isPending, error, status, isError, mutate, mutateAsync} = useMutation({
     mutationKey: ["deleteTask"],
     mutationFn: async (id)=>{
       const res = await axiosPublic.delete(`/deleteTask/${id}`)
@@ -14,5 +14,5 @@ export default function useDeleteTask() {
     onSuccess: ()=> queryClient.invalidateQueries(['myTasks'])
   })
 
-  return {data, isPending, isError, error, status, mutate}
+  return {data, isPending, isError, error, status, mutate, mutateAsync}
 }

@@ -3,7 +3,7 @@ import axiosPublic from "../config/axios.config";
 
 export default function useCreateUser() {
 
-  const {data, isPending, error, status, isError, mutate} = useMutation({
+  const {data, isPending, error, status, isError, mutate, mutateAsync} = useMutation({
     mutationKey: ["createUser"],
     mutationFn: async (data)=>{
       const res = await axiosPublic.post('/createUser', data)
@@ -11,5 +11,5 @@ export default function useCreateUser() {
     }
   })
 
-  return {data, isPending, isError, error, status, mutate}
+  return {data, isPending, isError, error, status, mutate, mutateAsync}
 }

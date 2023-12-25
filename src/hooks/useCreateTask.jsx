@@ -5,7 +5,7 @@ export default function useCreateTask() {
 
   const queryClient = useQueryClient()
 
-  const {data, isPending, error, status, isError, isSuccess, mutate} = useMutation({
+  const {data, isPending, error, status, isError, isSuccess, mutate, mutateAsync} = useMutation({
     mutationKey: ["createUser"],
     mutationFn: async (data)=>{
       const res = await axiosPublic.post('/createTask', data)
@@ -14,5 +14,5 @@ export default function useCreateTask() {
     onSuccess: ()=> queryClient.invalidateQueries(["myTasks"])
   })
 
-  return {data, isPending, isError, error, status, isSuccess, mutate}
+  return {data, isPending, isError, error, status, isSuccess, mutate, mutateAsync}
 }

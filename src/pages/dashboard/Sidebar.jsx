@@ -1,3 +1,4 @@
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AlignHorizontalLeftIcon from '@mui/icons-material/AlignHorizontalLeft';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -13,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import tickIcon from '../../assets/ticktickicon.png';
 
 const drawerWidth = 240;
 
@@ -26,6 +28,7 @@ function Sidebar(props) {
   };
 
   const navItem = [
+    { label: "My Profile", route: "/dashboard", icon: <AccountCircleIcon /> },
     { label: "All Task", route: "/dashboard/allTask", icon: <AlignHorizontalLeftIcon /> },
   ]
 
@@ -41,8 +44,11 @@ function Sidebar(props) {
   const drawer = (
     <div>
       <Toolbar>
-        <Typography>
-          Tick Tick
+      <Typography
+          variant="h6"
+          component="div"
+        >
+          <img src={tickIcon} style={{ width: '10rem' }} />
         </Typography>
       </Toolbar>
       <Divider />

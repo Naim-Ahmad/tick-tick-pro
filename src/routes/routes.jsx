@@ -3,10 +3,12 @@ import MainLayout from '../layouts/MainLayout';
 import Contacts from '../pages/contacts/Contacts';
 import Dashboard from '../pages/dashboard/Dashboard';
 import Content from '../pages/dashboard/allTask/Content';
+import MyProfile from '../pages/dashboard/myProfile/MyProfile';
 import Features from '../pages/features/Features';
 import Home from '../pages/home/Home';
 import SignIn from '../pages/signIn/SignIn';
 import SignUp from '../pages/signUp/SignUp';
+import PrivateRoute from './PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -39,8 +41,12 @@ const router = createBrowserRouter([
 
   {
     path: '/dashboard',
-    element: <Dashboard/>,
+    element: <PrivateRoute><Dashboard/></PrivateRoute>,
     children: [
+      {
+        index: true,
+        element: <MyProfile/>
+      },
       {
         path: 'allTask',
         element:  <Content />

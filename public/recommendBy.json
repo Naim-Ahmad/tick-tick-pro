@@ -1,0 +1,57 @@
+[
+  {
+    "user_type": "Professionals and Business Users",
+    "roles": [
+      "Project managers",
+      "Team leads",
+      "Business executives",
+      "Entrepreneurs"
+    ]
+  },
+  {
+    "user_type": "Students and Educators",
+    "roles": ["Students", "Educators"]
+  },
+  {
+    "user_type": "Freelancers and Remote Workers",
+    "roles": ["Freelancers", "Remote workers"]
+  },
+  {
+    "user_type": "Creatives and Designers",
+    "roles": ["Graphic designers", "Writers", "Artists"]
+  },
+  {
+    "user_type": "Home Users and Individuals",
+    "roles": [
+      "Individuals managing household chores",
+      "People planning events and trips"
+    ]
+  },
+  {
+    "user_type": "Researchers and Academics",
+    "roles": ["Researchers", "Academics"]
+  },
+  {
+    "user_type": "Health and Fitness Enthusiasts",
+    "roles": [
+      "Individuals tracking fitness routines",
+      "People with health-related goals"
+    ]
+  },
+  {
+    "user_type": "Goal Setters and Productivity Enthusiasts",
+    "roles": [
+      "Individuals focused on personal development",
+      "Goal setters",
+      "Productivity enthusiasts"
+    ]
+  },
+  {
+    "user_type": "Collaborative Teams",
+    "roles": ["Teams collaborating on projects"]
+  },
+  {
+    "user_type": "Anyone Seeking Better Organization",
+    "roles": ["Individuals seeking better organization"]
+  }
+]
